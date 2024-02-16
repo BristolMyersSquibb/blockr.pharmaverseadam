@@ -5,18 +5,27 @@
 #' @param ... Passed to [blockr::new_data_block()]
 #' 
 #' @import pharmaverseadam
-#' @importFrom blockr new_data_block initialize_block
+#' @importFrom blockr new_block new_select_field initialize_block
 #' 
 #' @export
-new_adam_block <- function(...) {
-  initialize_block(
-    new_data_block(
-      ...,
-      dat = as.environment("package:pharmaverseadam")
-    )
-  )
-}
-
 adam_block <- function(...) {
   initialize_block(new_adam_block(...))
+}
+
+new_adam_block <- function(...) {
+  ds <- utils::data(
+    package = "pharmaverseadam"
+  )
+
+  new_block(
+    fields = list(
+      dataset = new_select_field(choices = ds$results[, 3])
+    ),
+    expr = quote({
+      e <- new.env()
+      utils::data(.(dataset), package = "pharmaverseadam", envir = e)
+      e[[.(dataset)]]
+    }),
+    class = c("adam_block", "data_block")
+  )
 }
