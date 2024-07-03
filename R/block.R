@@ -15,9 +15,11 @@ new_adam_block <- function(selected = character(), ...) {
     package = "pharmaverseadam"
   )
 
-  stopifnot(
-    "selected dataset not in available choices" = selected %in% ds$results[, 3]
-  )
+  if (length(selected)) {
+    stopifnot(
+      "selected dataset not in available choices" = selected %in% ds$results[, 3]
+    )
+  }
 
   new_block(
     fields = list(
