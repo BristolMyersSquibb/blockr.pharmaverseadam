@@ -20,19 +20,9 @@ remotes::install_github("blockr-org/blockr.pharmaverseadam")
 library(blockr)
 library(blockr.pharmaverseadam)
 
-stack <- new_stack(
-    adam_block
-)
+serve_stack(new_stack(new_adam_block(selected = "adcm")))
 
-ui <- fluidPage(
-    theme = bslib::bs_theme(5L),
-    generate_ui(stack)
-)
-
-server <- function(...){
-    generate_server(stack)
-}
-
-shinyApp(ui, server)
+# Will error
+# serve_stack(new_stack(new_adam_block(selected = "test")))
 ```
 
