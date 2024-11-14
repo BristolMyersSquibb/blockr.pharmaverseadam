@@ -1,3 +1,9 @@
+# blockr.pharmaversdtm 0.0.1.9001
+
+## Minor change
+- Cleanup `register_adam_blocks()` according to latest blockr registry.
+
+
 # blockr.pharmaverseadam 0.0.1.9000
 
 ## Documentation
